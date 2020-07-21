@@ -44,4 +44,7 @@ payload = {
     'text': args['message']
 }
 
-requests.post(config['url'], json=payload)
+if 'proxy' in config and config['proxy'] is not None:
+    requests.post(config['url'], json=payload, proxies={'https': config['proxy']})
+else:
+    requests.post(config['url'], json=payload)
